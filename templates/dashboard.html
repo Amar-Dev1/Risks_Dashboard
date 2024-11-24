@@ -1,0 +1,236 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid parent">
+
+    <!-- start settings icons -->
+    <div class="settings-icons">
+        <div class="icon"><i class="bi bi-question-circle"></i></div>
+        <div class="icon"><i class="bi bi-gear"></i></div>
+        <div class="icon"><i class="bi bi-person"></i></div>
+    </div>
+    <!-- end settings icons -->
+
+    <!-- start sidebar -->
+    <div class="row">
+        <div class="col-md-2 col-lg-1 col-sm-12">
+            <div id="sidebar" class="d-flex flex-column align-items-center p-2">
+                <a href="#" class="text-danger"><i class="nav-link bi bi-house"></i></a>
+                <a href="#"><i class="nav-link bi bi-search"></i></a>
+                <a href="/dashboard" id="dashboard-link"><i class="nav-link bi bi-clipboard-data active"></i></a>
+                <a href="#"><i class="nav-link bi bi-exclamation-triangle"></i></a>
+                <a href="#"><i class="nav-link bi bi-browser-edge"></i></a>
+                <a href="#"><i class="nav-link bi bi-globe"></i></a>
+                <a href="#"><i class="nav-link bi bi-layers"></i></a>
+            </div>
+        </div>
+        <!-- end sidebar -->
+
+        <!-- start main content -->
+        <div class="col-md-10 col-lg-11 col-sm-12 main-col">
+            <h2 class="main-title">Dashboard</h2>
+            <div class="row mt-5 mb-5">
+                <!-- start risk score card -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="the-card py-3 px-3 d-flex justify-content-evenly align-items-center ">
+                        <span class="title">Risk scores</span>
+                        <div class="chart-wrapper">
+                            <div class="score d-flex justify-content-center flex-column">
+                                <h3>F</h3>
+                                <p>Very high risk</p>
+                            </div>
+                            <canvas id="Risk-chart"></canvas>
+                        </div>
+                        <div class="chart-details text-white">
+                            <div class="critical">
+                                <label>Critical</label>
+                                <h3 id="critical-data"></h3>
+                                <small id="critical-small"></small>
+                            </div>
+                            <div class="high">
+                                <label>High</label>
+                                <h3 id="high-data"></h3>
+                                <small id="high-small"></small>
+                            </div>
+                            <div class="medium">
+                                <label>Medium</label>
+                                <h3 id="medium-data"></h3>
+                                <small id="medium-small"></small>
+                            </div>
+                        </div>
+                        <a href="#" class="link">view all risks</a>
+                    </div>
+                </div>
+                <!-- end risk score card -->
+
+                <!-- start unResolved risks card -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="the-card py-3 px-3 unResolved-risks">
+                        <span class="title">unResolved risks</span>
+                        <a href="#" class="link">view all risks</a>
+                        <div class="content">
+                            <div class="risk1">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-exclamation-circle"
+                                        style="color: {{ risk_data['datasets'][0]['backgroundColor'][0] }};"></i>
+                                </div>
+                                <div class="text-wrapper">
+                                    <p>{{unresolvedRisks[0]["description"]}}</p>
+                                    <span>{{unresolvedRisks[0]["website"]}}</span>
+                                    <small>
+                                        {{ unresolvedRisks[0]['period'] }}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="risk2">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-exclamation-circle"
+                                        style="color: {{ risk_data['datasets'][0]['backgroundColor'][1] }};"></i>
+                                </div>
+                                <div class="text-wrapper">
+                                    <p>{{unresolvedRisks[1]["description"]}}</p>
+                                    <span>{{unresolvedRisks[1]["website"]}}</span>
+                                    <small>{{unresolvedRisks[1]["period"]}}</small>
+                                </div>
+                            </div>
+                            <div class="risk3">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-exclamation-circle text-danger"></i>
+                                </div>
+                                <div class="text-wrapper">
+                                    <p>{{unresolvedRisks[2]["description"]}}</p>
+                                    <span>{{unresolvedRisks[2]["website"]}}</span>
+                                    <small>{{unresolvedRisks[2]["period"]}}</small>
+                                </div>
+                            </div>
+                            <div class="risk4">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-exclamation-circle"
+                                        style="color: {{ risk_data['datasets'][0]['backgroundColor'][2] }};"></i>
+                                </div>
+                                <div class="text-wrapper">
+                                    <p>{{unresolvedRisks[3]["description"]}}</p>
+                                    <span>{{unresolvedRisks[3]["website"]}}</span>
+                                    <small>{{unresolvedRisks[3]["period"]}}</small>
+                                </div>
+                            </div>
+                            <div class="risk5">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-exclamation-circle"
+                                        style="color: {{ risk_data['datasets'][0]['backgroundColor'][0] }};"></i>
+                                </div>
+                                <div class="text-wrapper">
+                                    <p>{{unresolvedRisks[4]["description"]}}</p>
+                                    <span>{{unresolvedRisks[4]["website"]}}</span>
+                                    <small>{{unresolvedRisks[4]["period"]}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end unResolved risks card -->
+
+                <!-- start assets card -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="the-card py-3 px-3 assets d-flex justify-content-start align-items-end">
+                        <a href="#" class="link">view assets graph -></a>
+                        <div class="asset-content text-center text-white d-flex flex-column">
+                            <div class="asset1">
+                                <label class="fw-bold">{{assets[0]["type"]}}</label>
+                                <h4>{{assets[0]["number"]}}</h4>
+                            </div>
+                            <div class="asset2">
+                                <label class="fw-bold">{{assets[1]["type"]}}</label>
+                                <h4>{{assets[1]["number"]}}</h4>
+                            </div>
+                            <div class="asset3">
+                                <label class="fw-bold">{{assets[2]["type"]}}</label>
+                                <h4>{{assets[2]["number"]}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end assets card -->
+
+                <!-- start domains card -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="the-card py-3 px-3 domains">
+                        <span class="title">New domains</span>
+                        <a href="#" class="link">view all domains</a>
+                        <div class="content">
+                            <div class="domain1">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-globe" style="color: {{risk_data.datasets[0]['backgroundColor'][2]}};"></i>
+                                </div>
+                                <div class="text-wrapper">
+                                    <p>{{domains[0]["description"]}}</p>
+                                    <span>{{domains[0]["website"]}}</span>
+                                    <small>{{domains[0]["date"]}}</small>
+                                </div>
+                            </div>
+                            <div class="domain2">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-globe" style="color: {{risk_data.datasets[0]['backgroundColor'][0]}};"></i>
+                                </div>
+                                <div class="text-wrapper">
+
+                                    <p>{{domains[1]["description"]}}</p>
+                                    <span>{{domains[1]["website"]}}</span>
+                                    <small>{{domains[1]["date"]}}</small>
+
+                                </div>
+
+                            </div>
+                            <div class="domain3">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-globe" style="color: {{risk_data.datasets[0]['backgroundColor'][1]}};"></i>
+                                </div>
+                                <div class="text-wrapper">
+
+                                    <p>{{domains[2]["description"]}}</p>
+                                    <span>{{domains[2]["website"]}}</span>
+                                    <small>{{domains[2]["date"]}}</small>
+
+                                </div>
+
+                            </div>
+                            <div class="domain4">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-globe" style="color: {{risk_data.datasets[0]['backgroundColor'][2]}};"></i>
+                                </div>
+                                <div class="text-wrapper">
+
+                                    <p>{{domains[3]["description"]}}</p>
+                                    <span>{{domains[3]["website"]}}</span>
+                                    <small>{{domains[3]["date"]}}</small>
+                                </div>
+
+                            </div>
+                            <div class="domain5">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-globe" style="color: {{risk_data.datasets[0]['backgroundColor'][0]}};"></i>
+                                </div>
+                                <div class="text-wrapper">
+
+                                    <p>{{domains[4]["description"]}}</p>
+                                    <span>{{domains[4]["website"]}}</span>
+                                    <small>{{domains[4]["date"]}}</small>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end domains card -->
+
+            </div>
+        </div>
+
+        <!-- end main content -->
+    </div>
+
+</div>
+
+<!-- chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}

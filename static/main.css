@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-color: #100d1f;
+    --light-color: #eee;
+    --text-color: rgb(79, 78, 78);
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+html,
+body {
+    background-color: black !important;
+}
+
+.parent {
+    position: relative
+}
+
+.parent .settings-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.parent .settings-icons .icon {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.parent .settings-icons .icon:hover {
+    background-color: var(--light-color);
+}
+
+.parent .settings-icons .icon i {
+    color: #ddd;
+}
+
+.parent .settings-icons .icon:hover i {
+    color: var(--dark-color);
+}
+
+/* start sidebar */
+#sidebar {
+    background-color: black;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 55px;
+    overflow-y: auto;
+    transition: all .5s ease-out;
+    box-shadow: 1px 1px 15px #333;
+
+}
+
+#sidebar a {
+    margin-top: 5px;
+    color: var(--text-color);
+}
+
+#sidebar a,
+#sidebar .nav-link.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 2px;
+    transition: all .3s ease-in-out;
+}
+
+#sidebar a:nth-child(1) {
+    margin-bottom: 20px;
+}
+
+#sidebar a i {
+    font-size: 20px;
+}
+
+#sidebar .nav-link.active {
+    background-color: rgb(33, 33, 33);
+    color: var(--light-color);
+    position: relative;
+}
+
+#sidebar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    left: -1px;
+    border-left: 1.5px solid red;
+}
+
+/* end sidebar */
+
+/* start main content */
+.main-col {
+    margin-left: 80px;
+}
+
+.main-title {
+    margin-top: 45px;
+    color: var(--light-color);
+}
+
+.the-card {
+    background-color: var(--dark-color);
+    margin: 10px 0;
+    border-radius: 5px;
+    position: relative;
+    min-height: 340px;
+    width: 97%;
+}
+
+.the-card .title,
+.the-card a {
+    position: absolute;
+    color: var(--text-color);
+    text-decoration: none;
+    /* i know ! this is for <a> */
+}
+
+.the-card .title {
+    top: 10px;
+    left: 20px;
+}
+
+.the-card a {
+    right: 20px;
+    top: 10px;
+}
+
+/* end main content */
+
+/* start risk score card */
+
+.chart-wrapper {
+    position: relative;
+}
+
+.chart-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 10px 10px 70px rgb(30, 28, 95);
+
+}
+
+.chart-wrapper .score {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    height: 85%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 50%;
+    border: 1.5px dashed var(--text-color);
+}
+
+.chart-wrapper #Risk-chart {
+    width: 200px !important;
+}
+
+.chart-wrapper .score h3 {
+    color: var(--light-color);
+    font-size: 42px;
+}
+
+.chart-wrapper .score p {
+    color: var(--text-color);
+}
+
+.chart-details div {
+    position: relative;
+    padding: 5px;
+}
+
+.chart-details div label {
+    display: block;
+    font-size: 10px;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.chart-details div h3 {
+    font-size: 26px;
+}
+
+.chart-details div small {
+    position: absolute;
+    font-size: 12px;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    top: 20px;
+    left: -10px;
+}
+
+/* end risk score card */
+
+/* start unresolved risks card */
+.content {
+    color: var(--light-color);
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.content div {
+    display: flex;
+    align-items: center;
+}
+
+.content div .icon-wrapper {
+    justify-self: flex-start;
+    flex-basis: 5%;
+}
+
+.content div .text-wrapper {
+    position: relative;
+    flex-basis: 95%;
+}
+
+.content div .text-wrapper p {
+    margin: 13px 0;
+    font-size: 18px;
+}
+
+.content div .text-wrapper span,
+.content div .text-wrapper small {
+    color: var(--text-color);
+    position: absolute;
+    font-size: 15px;
+}
+
+.content div .text-wrapper span {
+    bottom: -10px;
+    left: 0;
+}
+
+.content div .text-wrapper small {
+    bottom: -10px;
+    right: 5px;
+}
+
+/* end unresolved risks card */
+
+/* start assets card */
+.assets {
+    background: url(../static/assets/networks.jpg) center no-repeat;
+    object-fit: cover;
+    position: relative;
+}
+
+.assets::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.assets .asset-content,
+.assets .link {
+    z-index: 2;
+}
+
+/* end assets card */
+
+@media (max-width: 768px) {
+    .parent .settings-icons {
+        position: fixed;
+        flex-direction: column;
+        top: 10%;
+        right: 0;
+    }
+
+    #sidebar {
+        position: fixed;
+        width: 100%;
+        height: fit-content;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0;
+        padding: 0;
+        z-index: 99;
+    }
+
+    #sidebar a {
+        margin: 0 !important;
+    }
+
+    .main-col {
+        margin-left: 0;
+        margin-top: 80px !important;
+    }
+
+    .main-title {
+        text-align: center;
+    }.the-card{
+        width: 95.5%;
+    }
+
+    .chart-wrapper #Risk-chart {
+        width: 150px !important;
+    }
+
+    .content div .text-wrapper p {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .content div .text-wrapper span,
+    .content div .text-wrapper small {
+        font-size: 12px;
+        bottom: -10px;
+    }
+
+    .content div .text-wrapper span {
+        left: 10px;
+    }
+}
