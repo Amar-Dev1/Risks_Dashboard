@@ -59,21 +59,21 @@ domains = [
     {
         "description": "account.example.io",
         "website": "Services:80/http",
-        "period": "May 23",
+        "date": "May 23",
     },
     {
         "description": "dev.example.io",
         "website": "443/https",
-        "period": "May 11",
+        "date": "May 11",
     },
     {
         "description": "www.example.io",
         "website": "Services:80/http,443/https,8443/http",
-        "period": "May 11",
+        "date": "May 11",
     },
     {
         "description": "test.example.io",
         "website": "8443/http",
-        "period": "8 Jan",
+        "date": "8 Jan",
     },
 ]
